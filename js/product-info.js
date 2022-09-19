@@ -5,6 +5,13 @@ let prodID = localStorage.getItem('prodID');
 let comments;
 let score;
 let usercomments;
+let a;
+let now;
+let c;
+
+function contador(){
+    
+}
 
 
 function starRating(score,a){
@@ -62,11 +69,12 @@ function showProductInfo(){
 
 function showComments(){
         let htmlContentToAppend = "";
-        let a = 0;
+        a = 0;
         for(let i = 0; i < comments.length; i++){
             usercomments = comments[i];
             console.log(usercomments);
             score = usercomments.score;
+
             htmlContentToAppend += `
             <div><h3> Comentarios </h3>
                 <div> <strong>${usercomments.user}</strong> - ${usercomments.dateTime} - <span id="${a}rating">
@@ -87,29 +95,69 @@ function showComments(){
         }   
     }
 
-function postComments(){
+function newComments(){
 
     let htmlContentToAppend = "";
+        
 
         htmlContentToAppend += `
         <div class="container">
             <h3> Comentar </h3><br>
             <div>
                 <h4> Tu opinión: </h4><br>
-                <textarea> </textarea><br>
+                <textarea id="opinion">  </textarea><br>
             </div>
             <div>
                 <h4> Tu puntuación: </h4><br>
-                <input type="number" <input><br>
-                <input type="button" value="Enviar">
+                <input  type="number" id="star_score" <input><br>
+                <input onclick="postComments()" type="button" value="Enviar">
             </div>
         </div>
-
         `
         document.getElementById("comment-post").innerHTML += htmlContentToAppend;
+        
+        
 
 }
 
+function postComments(){
+    a = a;
+    c = 0;
+
+    let puntuacion = document.getElementById("star_score").value;
+    let opinion = document.getElementById("opinion").value;
+    score = puntuacion
+    
+    let htmlContentToAppend = "";
+    htmlContentToAppend += `
+            <div><h3> Comentarios </h3>
+                <div> <strong>${localStorage.getItem('usuario')}-</strong><span id="${c}date"> </span><span id="${a}rating">
+                 </span>
+                    <div>
+                        ${opinion}
+                    </div>
+                </div>
+                <hr>
+            </div>
+            `
+
+    document.getElementById("comments").innerHTML += htmlContentToAppend;
+    starRating(score,a);
+    time(c);
+    a++;
+    c++;
+    console.log(c);
+}
+
+function time(c){
+    c = c;
+    now = new Date();
+
+    let dateTime = `${now.getFullYear()}-${now.getMonth() +1}-${now.getDate()}`;
+    dateTime += ` ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+
+    document.getElementById(c+"date").innerHTML = dateTime;
+}
 
 
 
@@ -124,7 +172,7 @@ document.addEventListener("DOMContentLoaded",function(){
                     comments = resultObj.data
                     showProductInfo();
                     showComments();
-                    postComments();
+                    newComments();
                 }
             })
             
