@@ -7,11 +7,7 @@ let score;
 let usercomments;
 let a;
 let now;
-let c;
-
-function contador(){
-    
-}
+let c = 0;
 
 
 function starRating(score,a){
@@ -122,7 +118,6 @@ function newComments(){
 
 function postComments(){
     a = a;
-    c = 0;
 
     let puntuacion = document.getElementById("star_score").value;
     let opinion = document.getElementById("opinion").value;
@@ -149,14 +144,13 @@ function postComments(){
     console.log(c);
 }
 
-function time(c){
-    c = c;
+function time(contador){
     now = new Date();
 
     let dateTime = `${now.getFullYear()}-${now.getMonth() +1}-${now.getDate()}`;
     dateTime += ` ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
-    document.getElementById(c+"date").innerHTML = dateTime;
+    document.getElementById(contador+"date").innerHTML = dateTime;
 }
 
 
